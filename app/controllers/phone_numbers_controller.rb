@@ -14,7 +14,7 @@ class PhoneNumbersController < ApplicationController
 
   # GET /phone_numbers/new
   def new
-    @phone_number = PhoneNumber.new
+    @phone_number = PhoneNumber.new(person_id: params[:person_id])
   end
 
   # GET /phone_numbers/1/edit
@@ -35,6 +35,7 @@ class PhoneNumbersController < ApplicationController
         format.json { render json: @phone_number.errors, status: :unprocessable_entity }
       end
     end
+    redirect_to @phone_number.person
   end
 
   # PATCH/PUT /phone_numbers/1
@@ -49,6 +50,7 @@ class PhoneNumbersController < ApplicationController
         format.json { render json: @phone_number.errors, status: :unprocessable_entity }
       end
     end
+    redirect_to @phone_number.person
   end
 
   # DELETE /phone_numbers/1
